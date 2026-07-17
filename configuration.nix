@@ -18,8 +18,8 @@
       "nix-command"
       "flakes"
     ];
-    cores = 15;
-    max-jobs = 2;
+#     cores = 15;
+#     max-jobs = 2;
   };
 
   zramSwap = {
