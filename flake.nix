@@ -5,6 +5,7 @@
     secrets.url = "/etc/nixos/.secrets";
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     personal-nixpkgs.url = "github:HyprGirl/nixpkgs?ref=master";
+    llamato-nixpkgs.url = "github:Llamato/nixpkgs?ref=master";
 
     nixos-hardware = {
       url = "github:nixos/nixos-hardware/master";

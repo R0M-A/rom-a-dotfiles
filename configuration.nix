@@ -18,7 +18,7 @@
       "nix-command"
       "flakes"
     ];
-    cores = 13;
+    cores = 15;
     max-jobs = 2;
   };
 
@@ -145,7 +145,7 @@
     enable = true;
     extraBackends = [ pkgs.hplipWithPlugin ];
 #     netConf = "192.168.1.13";
-    openFirewall = true;
+#     openFirewall = true;
   };
 
   # Enable sound with pipewire.
@@ -251,7 +251,7 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.android_sdk.accept_license = true;
   nixpkgs.config.permittedInsecurePackages = [
-#     "pnpm-10.29.2"
+    "electron-40.10.5"
   ];
 
 
@@ -302,6 +302,7 @@
     heroic
     vscode-fhs
 #     anime4k
+#     inputs.llamato-nixpkgs.legacyPackages.${pkgs.system}.llvm-mos
 
     android-tools
     (android-studio.withSdk (androidenv.composeAndroidPackages { platformVersions = [ "36" ]; includeNDK = true; }).androidsdk)
@@ -354,19 +355,24 @@
     joinNetworks = [ "743993800f415883" ];
   };
 
-
-  programs.ssh.extraConfig = ''
-    Host tina-server
-      User romana
-      HostName homelab.llamato.dev
-      IdentitiesOnly yes
-      IdentityFile ${inputs.secrets.ssh.tina}
-    Host openwrt
-      User root
-      HostName 192.168.1.1
-      IdentitiesOnly yes
-      IdentityFile ${inputs.secrets.ssh.openwrt}
-  '';
+  programs.ssh = {
+    extraConfig = ''
+      Host tina-server
+        User romana
+        HostName homelab.llamato.dev
+        IdentitiesOnly yes
+        IdentityFile ${inputs.secrets.ssh.tina}
+      Host openwrt
+        User root
+        HostName 192.168.1.1
+        IdentitiesOnly yes
+        IdentityFile ${inputs.secrets.ssh.openwrt}
+      Host github.com
+        User git
+        IdentitiesOnly yes
+        IdentityFile ${inputs.secrets.ssh.github}
+    '';
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
