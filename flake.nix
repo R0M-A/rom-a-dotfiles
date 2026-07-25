@@ -34,12 +34,12 @@
         specialArgs = { inherit inputs; };
         system = "x86_64-linux";
         modules = [
-          ./hardware-configuration.nix
-          ./hardware-extra.nix
-          ./periferija.nix
-          ./configuration.nix
-          ./obs.nix
-          ./git.nix
+          ./hosts/labin-703/hardware-configuration.nix
+          ./hosts/labin-703/hardware-extra.nix
+          ./hosts/labin-703/configuration.nix
+          ./modules/razer-mouse.nix
+          ./modules/obs.nix
+          ./modules/git.nix
         ];
       };
     };

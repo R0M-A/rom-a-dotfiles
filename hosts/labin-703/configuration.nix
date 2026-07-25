@@ -297,7 +297,7 @@
     tor-browser
     uefitool
     rpi-imager
-    (pkgs.callPackage ./kate-wakatime.nix { })
+    (pkgs.callPackage ../../modules/kate-wakatime.nix { })
     heroic
     vscode-fhs
 #     anime4k
@@ -305,18 +305,6 @@
 
     android-tools
     (android-studio.withSdk (androidenv.composeAndroidPackages { platformVersions = [ "36" ]; includeNDK = true; }).androidsdk)
-
-    (python3.withPackages (
-            p: with p; [
-              black
-              openpyxl
-              jupyter
-              ipython
-              numpy
-              scipy
-              matplotlib
-            ]
-          ))
   ];
 
   # Set up PGP

@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  ...
 }:
 {
   hardware.openrazer.enable = true;
