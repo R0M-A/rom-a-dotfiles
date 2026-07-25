@@ -40,6 +40,7 @@
           ./configuration.nix
           ./xmrig/xmrig.nix
           ./obs.nix
+          ./git.nix
         ];
       };
     };

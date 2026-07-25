@@ -285,7 +285,6 @@
 #     protonup-qt
     simple-scan
 #     killall
-    git
     nixfmt
     qdiskinfo
     kdiskmark
