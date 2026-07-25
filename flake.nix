@@ -38,7 +38,6 @@
           ./hardware-extra.nix
           ./periferija.nix
           ./configuration.nix
-          ./xmrig/xmrig.nix
           ./obs.nix
           ./git.nix
         ];
