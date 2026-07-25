@@ -42,5 +42,16 @@
           ./modules/git.nix
         ];
       };
+
+      nixosConfigurations."misao-13" = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/misao-13/configuration.nix
+          ./hosts/misao-13/intel.nix
+          ./modules/obs.nix
+          ./modules/git.nix
+        ];
+      };
     };
 }
