@@ -40,6 +40,7 @@
           ./modules/razer-mouse.nix
           ./modules/obs.nix
           ./modules/git.nix
+          ./modules/vesktop.nix
         ];
       };
 

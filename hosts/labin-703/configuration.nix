@@ -11,7 +11,6 @@
 }:
 
 {
-
   nix.settings = {
     auto-optimise-store = true;
     experimental-features = [
@@ -213,8 +212,7 @@
       kdePackages.audiocd-kio
       kdePackages.k3b
       osu-lazer-bin
-      betterdiscordctl
-      vesktop
+#       betterdiscordctl
       (prismlauncher.override { jdks = [ jdk25 ]; })
 #       (lutris.override {
 #         extraLibraries = pkgs: [ geckodriver ];
@@ -274,7 +272,7 @@
     rnote
 #     ani-cli
     vscodium
-    discord
+#     discord
 #     signal-desktop
     qbittorrent
 #     handbrake
