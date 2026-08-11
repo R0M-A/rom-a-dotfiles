@@ -298,6 +298,7 @@
     (pkgs.callPackage ../../modules/kate-wakatime.nix { })
     heroic
     vscode-fhs
+    rawtherapee
 #     anime4k
 #     inputs.llamato-nixpkgs.legacyPackages.${pkgs.system}.llvm-mos
 
