@@ -270,7 +270,7 @@
     librewolf
     nicotine-plus
     rnote
-#     ani-cli
+    ani-cli
     vscodium
 #     discord
 #     signal-desktop
