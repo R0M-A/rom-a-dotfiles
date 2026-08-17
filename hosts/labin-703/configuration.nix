@@ -264,8 +264,8 @@
     gimp3
 #     apktool
 #     darktable
-#     mpv
-    vlc
+    mpv
+#     vlc
     libreoffice-qt-fresh
     librewolf
     nicotine-plus
