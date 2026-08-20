@@ -6,6 +6,8 @@
   wrapGAppsHook3,
 }:
 
+# Not needed anymore, this is now in nixpkgs
+
 stdenv.mkDerivation {
   pname = "zenmonitor";
   version = "git";
