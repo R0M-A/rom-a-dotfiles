@@ -18,7 +18,7 @@
       "flakes"
     ];
 #     cores = 15;
-#     max-jobs = 2;
+    max-jobs = 30;
   };
 
   zramSwap = {
