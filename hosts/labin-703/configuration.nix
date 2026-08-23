@@ -266,7 +266,7 @@
 #     darktable
     mpv
 #     vlc
-    libreoffice-qt-fresh
+    libreoffice-qt
     librewolf
     nicotine-plus
     rnote
