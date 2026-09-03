@@ -301,6 +301,7 @@
     rawtherapee
 #     anime4k
 #     inputs.llamato-nixpkgs.legacyPackages.${pkgs.system}.llvm-mos
+    eclipses.eclipse-java
 
     android-tools
     (android-studio.withSdk (androidenv.composeAndroidPackages { platformVersions = [ "36" ]; includeNDK = true; }).androidsdk)
