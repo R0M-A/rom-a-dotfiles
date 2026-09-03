@@ -302,6 +302,7 @@
 #     anime4k
 #     inputs.llamato-nixpkgs.legacyPackages.${pkgs.system}.llvm-mos
     eclipses.eclipse-java
+    nixd
 
     android-tools
     (android-studio.withSdk (androidenv.composeAndroidPackages { platformVersions = [ "36" ]; includeNDK = true; }).androidsdk)
