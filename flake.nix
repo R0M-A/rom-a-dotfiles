@@ -22,6 +22,7 @@
           ./hosts/labin-703/hardware-configuration.nix
           ./hosts/labin-703/hardware-extra.nix
           ./hosts/labin-703/configuration.nix
+          ./modules/LLM/ollama.nix
           ./modules/razer-mouse.nix
           ./modules/obs.nix
           ./modules/git.nix
