@@ -1,9 +1,8 @@
 { pkgs, ... }:
 let
-  modelsPreset = ''
+  models-preset = pkgs.writeText "llama-cpp-models.ini" ''
     version = 1
 
-    # Shared runtime settings.
     [*]
     jinja = true
     flash-attn = on
@@ -14,14 +13,11 @@ let
     ubatch-size = 256
     parallel = 1
 
-    # Qwen3-Coder-30B-A3B-Instruct
-    #
-    # Unsloth's recommended Q4 GGUF:
-    # UD-Q4_K_XL (~17.7 GB)
+
     [qwen3-coder]
     hf-repo = unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF:UD-Q4_K_XL
-
     ctx-size = 32768
+    load-on-startup = false
 
     # Unsloth recommended sampling:
     temp = 0.7
@@ -29,16 +25,11 @@ let
     top-k = 20
     repeat-penalty = 1.05
 
-    load-on-startup = true
 
-    # DavidAU Qwen3.8-27B TURBO MTP
-    #
-    # Q4_K_M MTP (~18 GB)
     [davidau-qwen38-mtp]
     hf-repo = DavidAU/Qwen3.8-27B-TURBO-Fable-Cold-Fusion-735-882-Heretic-Uncensored-NEO-CODER-MAX-MTP-GGUF:Q4_K_M
-
-    # DavidAU specifically recommends 8-16K context.
-    ctx-size = 16384
+    ctx-size = 32768
+    image-min-tokens = 2048
 
     # DavidAU "precise coding" settings:
     temp = 0.6
@@ -52,7 +43,21 @@ let
     spec-type = draft-mtp
     spec-draft-n-max = 2
 
-    load-on-startup = false
+    load-on-startup = true
+  '';
+
+  mcp-servers-config = pkgs.writeText "mcp-servers.json" ''
+    {
+      "mcpServers": {
+        "web": {
+          "command": "${pkgs.mcp-server-fetch}/bin/mcp-server-fetch"
+        },
+
+        "nixos": {
+          "command": "${pkgs.mcp-nixos}/bin/mcp-nixos"
+        }
+      }
+    }
   '';
 in
 {
@@ -64,20 +69,22 @@ in
 
     settings = {
       host = "127.0.0.1";
-      port = 8080;
+      port = 9931;
+      cors-origins = "localhost";
 
-      models-preset = modelsPreset; # Router mode: models are loaded on demand.
+      inherit models-preset mcp-servers-config;
       models-max = 1;
       models-autoload = true;
     };
   };
 
-#   # The NixOS llama.cpp service uses DynamicUser.
-#   # Give it access to the GPU render device.
-#   systemd.services.llama-cpp.serviceConfig.SupplementaryGroups = [
-#     "render"
-#   ];
-
+  systemd.services.llama-cpp = {
+#     serviceConfig.CacheDirectory = "llama-cpp";
+    environment = {
+      XDG_CACHE_HOME = "/var/cache/llama-cpp";
+#       MESA_SHADER_CACHE_DIR = "/var/cache/llama-cpp";
+    };
+  };
 
   environment.systemPackages = with pkgs; [
     vulkan-tools

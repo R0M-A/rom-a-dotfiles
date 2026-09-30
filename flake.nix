@@ -22,10 +22,11 @@
           ./hosts/labin-703/hardware-configuration.nix
           ./hosts/labin-703/hardware-extra.nix
           ./hosts/labin-703/configuration.nix
-          ./modules/LLM/ollama.nix
+          ./modules/LLM/llama-cpp.nix
           ./modules/razer-mouse.nix
           ./modules/obs.nix
           ./modules/git.nix
+          ./modules/tex.nix
           ./modules/vesktop.nix
           ./modules/wire-guard.nix
         ];
