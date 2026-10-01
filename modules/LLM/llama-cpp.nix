@@ -6,30 +6,61 @@ let
     [*]
     jinja = true
     flash-attn = on
-    cache-type-k = q8_0
-    cache-type-v = q8_0
     load-mode = mmap
-    batch-size = 512
-    ubatch-size = 256
-    parallel = 1
-
-
-    [qwen3-coder]
-    hf-repo = unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF:UD-Q4_K_XL
-    ctx-size = 32768
     load-on-startup = false
 
-    # Unsloth recommended sampling:
-    temp = 0.7
-    top-p = 0.8
+    # KV cache
+    cache-type-k = q8_0
+    cache-type-v = q8_0
+    no-kv-offload = true
+    ctx-size = 16384
+    n-predict = 8192
+
+    # Use as much GPU, but leave 512MB for the rest
+    fit = on
+    fit-target = 512
+
+    # Don't eat the whole CPU pls
+    threads = 16        # generation
+    threads-batch = 20  # batch and prompt processing
+
+    # Interactive single-user
+    batch-size = 256    # logical
+    ubatch-size = 128   # physical
+    parallel = 1
+
+    [Qwen3.8-4B-Distill:Q5_K_M-empero-ai]
+    hf-repo = empero-ai/Qwen3.8-4B-Distill-GGUF:Q5_K_M
+    load-on-startup = true
+    no-kv-offload = false
+
+    # Empero's published settings.
+    temp = 0.6
+    top-p = 0.95
     top-k = 20
-    repeat-penalty = 1.05
+    min-p = 0.0
+    repeat-penalty = 1.0
 
+    [Dirk-Qwen3.8-9B:Q4_K_M-JamieBradfield]
+    hf-repo = JamieBradfield/Dirk-Qwen3.8-9B-GGUF:Q4_K_M
 
-    [davidau-qwen38-mtp]
+    # Configuring chat_template
+    # chat_template_kwargs = {"reasoning_effort":"medium"}
+
+    # Qwen3.5/Empero recommended settings.
+    temp = 0.6
+    top-p = 0.95
+    top-k = 20
+    min-p = 0.0
+    repeat-penalty = 1.0
+
+    [Qwen3.8-27B:Q4_K_M-DavidAU]
     hf-repo = DavidAU/Qwen3.8-27B-TURBO-Fable-Cold-Fusion-735-882-Heretic-Uncensored-NEO-CODER-MAX-MTP-GGUF:Q4_K_M
-    ctx-size = 32768
-    image-min-tokens = 2048
+    image-min-tokens = 1024
+
+    # Use the MTP heads included in this GGUF.
+    spec-type = draft-mtp
+    spec-draft-n-max = 2
 
     # DavidAU "precise coding" settings:
     temp = 0.6
@@ -38,12 +69,6 @@ let
     min-p = 0.0
     presence-penalty = 0.0
     repeat-penalty = 1.0
-
-    # Use the MTP heads included in this GGUF.
-    spec-type = draft-mtp
-    spec-draft-n-max = 2
-
-    load-on-startup = true
   '';
 
   mcp-servers-config = pkgs.writeText "mcp-servers.json" ''
@@ -74,15 +99,19 @@ in
 
       inherit models-preset mcp-servers-config;
       models-max = 1;
-      models-autoload = true;
     };
   };
 
   systemd.services.llama-cpp = {
-#     serviceConfig.CacheDirectory = "llama-cpp";
+    serviceConfig = {
+      CacheDirectory = "llama-cpp";
+      CacheDirectoryMode = "0750";
+    };
+
     environment = {
+      LLAMA_CACHE = "/var/cache/llama-cpp";
       XDG_CACHE_HOME = "/var/cache/llama-cpp";
-#       MESA_SHADER_CACHE_DIR = "/var/cache/llama-cpp";
+      MESA_SHADER_CACHE_DIR = "/var/cache/llama-cpp";
     };
   };
 
