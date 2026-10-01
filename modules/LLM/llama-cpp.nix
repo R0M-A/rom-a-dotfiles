@@ -29,10 +29,14 @@ let
     ubatch-size = 128   # physical
     parallel = 1
 
+
     [Qwen3.8-4B-Distill:Q5_K_M-empero-ai]
     hf-repo = empero-ai/Qwen3.8-4B-Distill-GGUF:Q5_K_M
     load-on-startup = true
     no-kv-offload = false
+
+    # Configuring chat_template
+    # chat_template_kwargs = {"reasoning_effort":"low"}
 
     # Empero's published settings.
     temp = 0.6
@@ -41,18 +45,6 @@ let
     min-p = 0.0
     repeat-penalty = 1.0
 
-    [Dirk-Qwen3.8-9B:Q4_K_M-JamieBradfield]
-    hf-repo = JamieBradfield/Dirk-Qwen3.8-9B-GGUF:Q4_K_M
-
-    # Configuring chat_template
-    # chat_template_kwargs = {"reasoning_effort":"medium"}
-
-    # Qwen3.5/Empero recommended settings.
-    temp = 0.6
-    top-p = 0.95
-    top-k = 20
-    min-p = 0.0
-    repeat-penalty = 1.0
 
     [Qwen3.8-27B:Q4_K_M-DavidAU]
     hf-repo = DavidAU/Qwen3.8-27B-TURBO-Fable-Cold-Fusion-735-882-Heretic-Uncensored-NEO-CODER-MAX-MTP-GGUF:Q4_K_M
