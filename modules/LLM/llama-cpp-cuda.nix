@@ -38,7 +38,6 @@ let
     top-p = 0.95
     top-k = 20
     min-p = 0.0
-    presence_penalty = 0.0
     repeat-penalty = 1.0
 
     # Reasoning budget
@@ -62,7 +61,7 @@ let
       "mcpServers": {
         "web": {
           "command": "${pkgs.mcp-server-fetch}/bin/mcp-server-fetch"
-        },
+        }
       }
     }
   '';
