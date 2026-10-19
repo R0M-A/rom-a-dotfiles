@@ -19,9 +19,7 @@
         specialArgs = { inherit inputs; };
         system = "x86_64-linux";
         modules = [
-          ./hosts/labin-703/hardware-configuration.nix
-          ./hosts/labin-703/hardware-extra.nix
-          ./hosts/labin-703/configuration.nix
+          ./hosts/labin-703
           ./modules/LLM/llama-cpp.nix
           ./modules/razer-mouse.nix
           ./modules/obs.nix
@@ -37,8 +35,7 @@
         specialArgs = { inherit inputs; };
         system = "x86_64-linux";
         modules = [
-          ./hosts/misao-13/configuration.nix
-          ./hosts/misao-13/intel.nix
+          ./hosts/misao-13
           ./modules/obs.nix
           ./modules/git.nix
         ];
