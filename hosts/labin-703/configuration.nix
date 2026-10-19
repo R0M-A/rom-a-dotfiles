@@ -188,7 +188,7 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account. Home manager its environment.
   users.users.romana = {
     isNormalUser = true;
     description = "Romana";
@@ -200,24 +200,6 @@
       "libvirtd"
       "kvm"
       "cdrom"
-    ];
-    packages = with pkgs; [
-      kdePackages.kate
-      kdePackages.filelight
-      kdePackages.skanlite
-      kdePackages.isoimagewriter
-      kdePackages.kdenlive
-      kdePackages.kgpg
-      kdePackages.plasma-login-manager
-      kdePackages.audiocd-kio
-      kdePackages.k3b
-      osu-lazer-bin
-#       betterdiscordctl
-      (prismlauncher.override { jdks = [ jdk25 ]; })
-#       (lutris.override {
-#         extraLibraries = pkgs: [ geckodriver ];
-#         extraPkgs = pkgs: [ mangohud ];
-#       })
     ];
   };
 
