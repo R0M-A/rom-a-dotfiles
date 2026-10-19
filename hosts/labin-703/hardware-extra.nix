@@ -29,11 +29,19 @@
   #services.hardware.openrgb.enable = true;
 
   #GPU drivers (6500 xt)
-  services.xserver.videoDrivers = [ "amdgpu" ];
-  hardware.amdgpu = {
-    opencl.enable = true;
-    initrd.enable = true;
+#   services.xserver.videoDrivers = [ "amdgpu" ];
+  hardware = {
+    amdgpu = {
+      initrd.enable = true;
+      opencl.enable = true;
+      zluda.enable = true;
+    };
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
   };
+
 
   hardware.enableRedistributableFirmware = true;
 }

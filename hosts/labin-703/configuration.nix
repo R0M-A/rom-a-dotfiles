@@ -31,7 +31,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ]; # cross-comile
-  boot.kernelParams = [ "video=HDMI-A-1:1920x1080@75" ]; # remove 2-3s of black screen
+#   boot.kernelParams = [ "video=HDMI-A-1:1920x1080@75" "video=DP-1:1920x1080@60" ]; # remove 2-3s of black screen
 
   networking.hostName = "labin-703"; # Define your hostname.
 
