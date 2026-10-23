@@ -2,7 +2,7 @@
 
 {
   #CPU monitoring
-#   hardware.cpu.amd.ryzen-smu.enable = true;
+  #   hardware.cpu.amd.ryzen-smu.enable = true;
 
   # Enables the zenpower sensor in lieu of the k10temp sensor on Zen CPUs https://git.exozy.me/a/zenpower3
   # On Zen CPUs zenpower produces much more data entries
@@ -11,25 +11,24 @@
   # boot.extraModulePackages = [ config.boot.kernelPackages.zenpower ];
   # boot.kernelModules = [ "zenpower" ];
 
-#   boot.kernelParams = [ "amd_pstate=guided" ];
-
+  #   boot.kernelParams = [ "amd_pstate=guided" ];
 
   #Hardware specific packages
-#   programs.coolercontrol.enable = true;
+  #   programs.coolercontrol.enable = true;
   environment.systemPackages = with pkgs; [
     rocmPackages.rocm-smi
     lm_sensors
-#     liquidctl
+    #     liquidctl
     pciutils
     usbutils
-#     openrgb-with-all-plugins
+    #     openrgb-with-all-plugins
   ];
   #Hardware specific services
   #services.cpupower-gui.enable = true;
   #services.hardware.openrgb.enable = true;
 
   #GPU drivers (6500 xt)
-#   services.xserver.videoDrivers = [ "amdgpu" ];
+  #   services.xserver.videoDrivers = [ "amdgpu" ];
   hardware = {
     amdgpu = {
       initrd.enable = true;
@@ -41,7 +40,6 @@
       enable32Bit = true;
     };
   };
-
 
   hardware.enableRedistributableFirmware = true;
 }

@@ -2,16 +2,18 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
-
+{ pkgs, lib, ... }:
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./intel.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./intel.nix
+  ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -33,15 +35,14 @@
   networking.modemmanager.enable = true;
 
   services.zerotierone = {
-  enable = true;
-  joinNetworks = [
-    "743993800f415883"
+    enable = true;
+    joinNetworks = [
+      "743993800f415883"
     ];
   };
 
-#   networking.firewall.allowedTCPPorts = [ 25565 ];
-#   networking.firewall.allowedUDPPorts = [ 25565 ];
-
+  #   networking.firewall.allowedTCPPorts = [ 25565 ];
+  #   networking.firewall.allowedUDPPorts = [ 25565 ];
 
   # Set your time zone.
   time.timeZone = "Europe/Zagreb";
@@ -107,7 +108,11 @@
   users.users.romana = {
     isNormalUser = true;
     description = "Romana";
-    extraGroups = [ "networkmanager" "wheel" "kvm" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "kvm"
+    ];
     packages = with pkgs; [
       kdePackages.kate
       kdePackages.plasma-thunderbolt
@@ -123,8 +128,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
     modem-manager-gui
     hyfetch
     fastfetch
@@ -133,7 +138,15 @@
     btop
     vesktop
     keepassxc
-    (android-studio-full.withSdk (androidenv.composeAndroidPackages { platformVersions = [ "36" "36.1" ]; includeNDK = true; }).androidsdk)
+    (android-studio-full.withSdk
+      (androidenv.composeAndroidPackages {
+        platformVersions = [
+          "36"
+          "36.1"
+        ];
+        includeNDK = true;
+      }).androidsdk
+    )
     android-tools
     (prismlauncher.override {
       jdks = [ jdk25 ];
@@ -147,7 +160,6 @@
 
   programs.localsend.enable = true;
   programs.thunderbird.enable = true;
-
 
   nixpkgs.config.android_sdk.accept_license = true;
   nixpkgs.config.allowUnfree = true;

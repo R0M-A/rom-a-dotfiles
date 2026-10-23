@@ -1,8 +1,4 @@
-{
-  lib,
-  pkgs,
-  ...
-}:
+{ lib, pkgs, ... }:
 {
   # More configuration is possible with home-manager
   environment.systemPackages = with pkgs; [
@@ -15,7 +11,7 @@
     description = "Autostarts ${pkgs.vesktop.pname}";
     unitConfig.ConditionUser = "romana";
     wantedBy = [ "graphical-session.target" ];
-    after    = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
 
     serviceConfig = {
       Type = "exec";
@@ -23,8 +19,8 @@
 
       Restart = "on-failure";
       RestartSec = "1s";
-      RestartSteps= "5";
-      RestartMaxDelaySec= "60s";
+      RestartSteps = "5";
+      RestartMaxDelaySec = "60s";
 
       NoNewPrivileges = true;
       PrivateTmp = true;

@@ -1,6 +1,13 @@
-{ stdenv, pkgs, fetchFromGitHub, makeWrapper, lib, ... }:
+{
+  stdenv,
+  pkgs,
+  fetchFromGitHub,
+  makeWrapper,
+  lib,
+  ...
+}:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation {
   pname = "ryzen-monitor-ng";
   version = "git";
 

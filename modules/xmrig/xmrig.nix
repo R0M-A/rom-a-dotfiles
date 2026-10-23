@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
-}:
+{ pkgs, ... }:
 {
   # Memtest86+
   boot.loader.systemd-boot.memtest86.enable = true;
@@ -43,23 +38,23 @@
   ];
   #   ++ [ inputs.personal-nixpkgs.legacyPackages.${pkgs.system}.ryzen-monitor-ng ];
 
-#   services.xmrig = {
-#     enable = true;
-#     settings = {
-#       autosave = true;
-#       cpu = true;
-#       opencl = false;
-#       cuda = false;
-#       pools = [
-#         {
-#           url = "pool.supportxmr.com:443";
-#           user = "42j6rhZc12uDPsLN45M5xgFarMxomgqRrcu32vhXiT4oVU4WhHNrn4SCJWg2YmyMKuWFqtz3iBBY2CBsK13UCL6fC3G3ekF"; # Rudar - Domagoj
-#           keepalive = true;
-#           tls = true;
-#         }
-#       ];
-#     };
-#   };
+  #   services.xmrig = {
+  #     enable = true;
+  #     settings = {
+  #       autosave = true;
+  #       cpu = true;
+  #       opencl = false;
+  #       cuda = false;
+  #       pools = [
+  #         {
+  #           url = "pool.supportxmr.com:443";
+  #           user = "42j6rhZc12uDPsLN45M5xgFarMxomgqRrcu32vhXiT4oVU4WhHNrn4SCJWg2YmyMKuWFqtz3iBBY2CBsK13UCL6fC3G3ekF"; # Rudar - Domagoj
+  #           keepalive = true;
+  #           tls = true;
+  #         }
+  #       ];
+  #     };
+  #   };
 
   ##### Miner #####
   #   services.monero = {

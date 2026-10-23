@@ -4,7 +4,7 @@
   lib,
   kdePackages,
   wakatime-cli,
-  fetchFromGitHub
+  fetchFromGitHub,
 }:
 
 # Derivation for kate-wakatime plugin
@@ -21,7 +21,7 @@ kdePackages.mkKdeDerivation rec {
 
   buildInputs = [
     kdePackages.ktexteditor
-#     wakatime-cli
+    #     wakatime-cli
   ];
 
   meta = {
@@ -29,6 +29,6 @@ kdePackages.mkKdeDerivation rec {
     homepage = "https://github.com/Tatsh/kate-wakatime";
     license = lib.licenses.mit;
     platforms = lib.platforms.linux;
-#     maintainers = with lib.maintainers; [ ];
+    #     maintainers = with lib.maintainers; [ ];
   };
 }

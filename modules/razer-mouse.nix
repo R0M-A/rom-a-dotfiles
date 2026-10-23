@@ -1,9 +1,4 @@
-{
-  lib,
-  pkgs,
-  config,
-  ...
-}:
+{ pkgs, ... }:
 {
   hardware.openrazer.enable = true;
   environment.systemPackages = with pkgs; [

@@ -2,14 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{
-  config,
-  pkgs,
-  lib,
-  inputs,
-  ...
-}:
-
+{ pkgs, inputs, ... }:
 {
   nix.settings = {
     auto-optimise-store = true;
@@ -17,7 +10,7 @@
       "nix-command"
       "flakes"
     ];
-#     cores = 15;
+    #     cores = 15;
     max-jobs = 30;
   };
 
@@ -31,16 +24,12 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ]; # cross-comile
-#   boot.kernelParams = [ "video=HDMI-A-1:1920x1080@75" "video=DP-1:1920x1080@60" ]; # remove 2-3s of black screen
+  #   boot.kernelParams = [ "video=HDMI-A-1:1920x1080@75" "video=DP-1:1920x1080@60" ]; # remove 2-3s of black screen
 
-  networking.hostName = "labin-703"; # Define your hostname.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
+  networking = {
+    networkmanager.enable = true;
+    hostName = "labin-703"; # Define your hostname.
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Zagreb";
@@ -79,24 +68,7 @@
   # Firmware updater
   services.fwupd.enable = true;
 
-#   services.iperf3 = {
-#     enable = false;
-#     openFirewall = true;
-#   };
-
-
   services.ipp-usb.enable = true;
-
-#   services.avahi = {
-#     enable = true;
-#     nssmdns4 = true;
-#     nssmdns6 = true;
-#     openFirewall = true;
-#     publish = {
-#       enable = true;
-#       userServices = true;
-#     };
-#   };
 
   services.printing = {
     enable = true;
@@ -112,39 +84,10 @@
     ];
   };
 
-#   services.samba = {
-#     enable = true;
-#     package = pkgs.sambaFull;
-#     openFirewall = true;
-#     settings = {
-#       "global" = {
-#         "load printers" = "yes";
-#         "printing" = "cups";
-#         "printcap name" = "cups";
-#       };
-#       "printers" = {
-#         "comment" = "All Printers";
-#         "path" = "/var/spool/samba";
-#         "public" = "yes";
-#         "browseable" = "yes";
-#         # to allow user 'guest account' to print.
-#         "guest ok" = "yes";
-#         "writable" = "no";
-#         "printable" = "yes";
-#         "create mode" = 0700;
-#       };
-#     };
-#   };
-#   systemd.tmpfiles.rules = [
-#     "d /var/spool/samba 1777 root root -"
-#   ];
-
   # Allow scanning with SANE driver
   hardware.sane = {
     enable = true;
     extraBackends = [ pkgs.hplipWithPlugin ];
-#     netConf = "192.168.1.13";
-#     openFirewall = true;
   };
 
   # Enable sound with pipewire.
@@ -157,22 +100,6 @@
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
-
-#    extraConfig.pipewire."92-low-latency" = {
-#      "context.properties" = {
-#        "default.clock.alloweed-rates" = [
-#          44100
-#          48000
-#          88200
-#          96000
-#          176400
-#          192000
-#        ];
-#        "default.clock.quantum" = 16;
-#        "default.clock.min-quantum" = 8;
-#        "default.clock.max-quantum" = 16;
-#      };
-#    };
   };
 
   # Disable auto-mute on ALSA startup
@@ -184,9 +111,6 @@
       ExecStart = "${pkgs.alsa-utils}/bin/amixer -c Generic sset 'Auto-Mute Mode' Disabled";
     };
   };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   # Define a user account. Home manager its environment.
   users.users.romana = {
@@ -234,7 +158,6 @@
     "electron-40.10.5"
   ];
 
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -244,34 +167,34 @@
     hyfetch
     keepassxc
     gimp3
-#     apktool
-#     darktable
+    #     apktool
+    #     darktable
     mpv
-#     vlc
+    #     vlc
     libreoffice-qt
     librewolf
     nicotine-plus
     rnote
     ani-cli
     vscodium
-#     discord
-#     signal-desktop
+    #     discord
+    #     signal-desktop
     qbittorrent
-#     handbrake
+    #     handbrake
     inkscape-with-extensions
-#     jpegoptim
+    #     jpegoptim
     firefox
-#     calibre
-#     protonup-qt
+    #     calibre
+    #     protonup-qt
     simple-scan
-#     killall
+    #     killall
     nixfmt
     qdiskinfo
     kdiskmark
-#     kicad
-#     simavr
+    #     kicad
+    #     simavr
     remmina
-#     electrum
+    #     electrum
     scrcpy
     (btop.override { rocmSupport = true; })
     tor-browser
@@ -281,13 +204,17 @@
     heroic
     vscode-fhs
     rawtherapee
-#     anime4k
-#     inputs.llamato-nixpkgs.legacyPackages.${pkgs.system}.llvm-mos
+    #     anime4k
     eclipses.eclipse-java
     nixd
 
     android-tools
-    (android-studio.withSdk (androidenv.composeAndroidPackages { platformVersions = [ "36" ]; includeNDK = true; }).androidsdk)
+    (android-studio.withSdk
+      (androidenv.composeAndroidPackages {
+        platformVersions = [ "36" ];
+        includeNDK = true;
+      }).androidsdk
+    )
   ];
 
   # Set up PGP
@@ -318,7 +245,6 @@
       baekmuk-ttf
     ];
   };
-
 
   services.zerotierone = {
     enable = true;
