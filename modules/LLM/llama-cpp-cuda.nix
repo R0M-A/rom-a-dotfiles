@@ -10,15 +10,15 @@ let
     load-on-startup = false
 
     # KV cache
-    cache-type-k = q8_0
-    cache-type-v = q8_0
+    cache-type-k = q4_0
+    cache-type-v = q4_0
     ctx-size = 32768
     n-predict = 8192
     parallel = 1
 
-    # Use as much GPU, but leave 5GB for the rest
+    # Use as much GPU, but leave 4GB for the rest
     fit = on
-    fit-target = 5120
+    fit-target = 4096
 
     # Don't eat the whole CPU pls
     threads = 8        # generation
@@ -26,7 +26,7 @@ let
 
     # Batch sizes
     batch-size = 2048    # logical
-    ubatch-size = 2048   # physical
+    ubatch-size = 256   # physical
 
     [Qwen3.8-27B:UD-Q4_K_XL]
     hf-repo = unsloth/Qwen3.8-27B-GGUF
