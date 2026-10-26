@@ -68,7 +68,7 @@
   # Firmware updater
   services.fwupd.enable = true;
 
-  services.ipp-usb.enable = true;
+#   services.ipp-usb.enable = true;
 
   services.printing = {
     enable = true;
