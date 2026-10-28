@@ -29,7 +29,7 @@
           useGlobalPkgs = true;
           useUserPackages = true;
           extraSpecialArgs = specialArgs;
-          users.romana = ./home.nix;
+          users.romana = ./romana-home.nix;
         };
       };
     in
@@ -54,6 +54,7 @@
         inherit specialArgs system;
         modules = [
           ./hosts/misao-13
+          home
           ./modules/obs.nix
           ./modules/git.nix
         ];
