@@ -33,7 +33,7 @@
     amdgpu = {
       initrd.enable = true;
       opencl.enable = true;
-      zluda.enable = true;
+#       zluda.enable = true; nixos rebuild blocker
     };
     graphics = {
       enable = true;

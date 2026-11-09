@@ -39,7 +39,7 @@
         modules = [
           ./hosts/labin-703
           home
-#           ./modules/LLM/llama-cpp.nix
+          ./modules/LLM/llama-cpp.nix
           ./modules/razer-mouse.nix
           ./modules/obs.nix
           ./modules/git.nix
