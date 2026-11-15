@@ -13,7 +13,7 @@
     kdePackages.audiocd-kio
     kdePackages.k3b
     osu-lazer-bin
-    (prismlauncher.override { jdks = [ jdk25 ]; })
+    (prismlauncher.override { jdks = [ temurin-bin-26 ]; })
   ];
 
   programs.bash = {
