@@ -45,7 +45,6 @@
           ./modules/git.nix
           ./modules/tex.nix
           ./modules/jp.nix
-          ./modules/vesktop.nix
           ./modules/wire-guard.nix
         ];
       };

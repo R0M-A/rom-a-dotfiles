@@ -2,6 +2,10 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    ./apps/vesktop.nix
+  ];
+
   home.packages = with pkgs; [
     kdePackages.kate
     kdePackages.filelight
