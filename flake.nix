@@ -29,7 +29,7 @@
           useGlobalPkgs = true;
           useUserPackages = true;
           extraSpecialArgs = specialArgs;
-          users.romana = ./romana-home.nix;
+          users.romana = ./home/romana.nix;
         };
       };
     in
